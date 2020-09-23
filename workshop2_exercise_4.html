@@ -1,20 +1,17 @@
 <!DOCTYPE html>
 <html>
-<body>
-
-
-<p id="demo"></p>
+<body onload ="lataus()">
 
 <script>
-function myFunction() {
+function lataus() {
   var txt;
-  var r = confirm("Press a button!");
+  var r = confirm("Are you a Student?");
   if (r == true) {
-    txt = "You pressed OK!";
+    txt = "Welcome student!";
   } else {
-    txt = "You pressed Cancel!";
+    txt = "Sorry, this page is for students only";
   }
-  document.getElementById("demo").innerHTML = txt;
+
 }
 </script>
 
