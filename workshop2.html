@@ -4,11 +4,12 @@
 		<meta charset="UTF-8">
 		<title>Workshop 2</title>
 		<style>
-			body {
+			<body onload = "lataus()"> {
 				font-family: "Trebuchet MS", Helvetica, sans-serif;
 				color: #333333;
 			}
 		</style>
+
 		<script>
 			<!-- Exercise2 -->
 
@@ -25,12 +26,21 @@ if(navigator.appName = 'mozilla/firefox') {
 	window.location.href = 'http://mozilla.org';
 } else {
 	window.location.href = 'http://www.microsoft.com';
-
 }
+<!-- Exercise4 -->
+ function lataus() {
+	var txt;
+  var r = confirm("Are you Student?");
+  if (r == true) {
+    txt = "Welcome student";
+  } else {
+    txt = "Sorry, this page is for students only";
+  }
+ }
+
 
 		</script>
 </head>
-
 
 <p>Workshop 2</p>
 <div>
