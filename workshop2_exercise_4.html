@@ -2,6 +2,9 @@
 <html>
 <body onload ="lataus()">
 
+
+<p id="demo"></p>
+
 <script>
 function lataus() {
   var txt;
@@ -11,7 +14,7 @@ function lataus() {
   } else {
     txt = "Sorry, this page is for students only";
   }
-
+  document.getElementById("demo").innerHTML = txt;
 }
 </script>
 
