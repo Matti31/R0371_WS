@@ -1,11 +1,38 @@
 <HTML>    
-
+    <style>
+        table {
+          font-family: arial, sans-serif;
+          border-collapse: collapse;
+          width: 100%;
+        }
+        
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+        
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        </style>
     <script>
-    
+    function lisaa() {
+        var table = document.getElementById("myTable");
+  var row = table.insertRow(0);
+  var cell1 = row.insertCell(0);
+  var cell2 = row.insertCell(1);
+  var cell3 = row.insertCell(2);
+  var cell4 = row.insertCell(3);
+  cell1.innerHTML = getElementById("paiva");
+  cell2.innerHTML = getElementById("alku");
+  cell3.innerHTML = getElementById("loppu");
+  cell4.innerHTML = getElementById("tapahtuma");
+    }
     </script>
     
     <h1>Todo-list</h1>
-    <form name="tyhja" action="#" onsubmit="return" method="POST">
+    <form name="tyhja" action="#" onsubmit="return lisaa" method="POST">
         <h2>Oh dear, it seems that you dont have nothing to do!</h2>
         <p>If you feel like you should have something important to remember, schedule it below</p>
         <p>Day:
@@ -24,7 +51,7 @@
             </p>
     </form>
 
-    <table>
+    <table id="myTable">
         <tr>
             <td>Day</td>
             <td>Event begin</td>
