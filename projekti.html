@@ -33,12 +33,14 @@
       cell2.innerHTML = alku;
       cell3.innerHTML = loppu;
       cell4.innerHTML = tapah;
+      document.getElementsByTagName('h2')[0].innerHTML = "It Seems that you have something to do after all";
+      document.getElementsByTagName('p')[0].innerHTML = "Add another event!";
     }
     </script>
     
     <h1>Todo-list</h1>
     <form name="tyhja" action="#" onsubmit="return false" method="POST">
-        <h2>Oh dear, it seems that you dont have nothing to do!</h2>
+        <h2>Oh dear, it seems that you dont have anything to do!</h2>
         <p>If you feel like you should have something important to remember, schedule it below</p>
         <p>Day:
             <input type="date" name="paiva" id="paiva">
