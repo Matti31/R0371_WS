@@ -17,6 +17,34 @@
         }
         </style>
     <script>
+      function validateForm() {
+    var x = document.forms.tyhja.paiva.value;
+    var p = document.getElementById('paiva');
+    var a = document.getElementById('alku');
+    var l = document.getElementById('loppu');
+    var t = document.getElementById('tapahtuma');
+    if (p == null) {
+        alert("You must select date");
+        p.style.borderColor = "red"; 
+        document.getElementById('pai').innerHTML=”<b>*Please select day </b>"
+        return false;
+    }
+    if (a == null) {
+        alert("You must select time");
+        a.style.borderColor = "red"; 
+        document.getElementById('pai').innerHTML=”<b>*Please select time </b>"
+        return false;
+    }
+    if (l == null) {
+        alert("You must select time");
+        return false;
+    }
+    if (t == null || x== "") {
+        alert("You must select event!");
+        return false;
+    }
+
+}
 function lisaa() {
         var event = document.forms.tyhja.paiva.value;
         var table = document.getElementById("myTable");
@@ -36,12 +64,19 @@ function lisaa() {
       document.getElementsByTagName('h2')[0].innerHTML = "It Seems that you have something to do after all";
       document.getElementsByTagName('p')[0].innerHTML = "Add another event!";
     }
-
+    function huomio() {
+     var p = confirm("Are you sure you want to clear your list?");
+      if (p == true) {
+    poista();
+  }  
+    }
     function poista() {
       var table = document.getElementById("myTable");
       for(var i = table.rows.length - 1; i > 0; i--)
       {
     table.deleteRow(i);
+    document.getElementsByTagName('h2')[0].innerHTML = "Oh dear, it seems that you dont have anything to do!";
+      document.getElementsByTagName('p')[0].innerHTML = "If you feel like you should have something important to remember, schedule it below";
 }
 
 }
@@ -54,15 +89,18 @@ function lisaa() {
         <p>If you feel like you should have something important to remember, schedule it below</p>
         <p>Day:
             <input type="date" name="paiva" id="paiva">
-             <span id="kello"></span></br>
+             <span id="pai"></span></br>
             Even begins:
             <input type="time" name="alku" id="alku">
+            <span id="tim"></span></br>
         </br>
             Event ends:
             <input type="time" name="loppu" id="loppu">
+            <span id="tim1"></span></br>
     </br>
             Event:
             <input type="text" name="tapahtuma" id="tapahtuma">
+            <span id="tap"></span></br>
 </br>
             <input type="submit" value="Add event" onclick="lisaa()"> 
             </p>
@@ -71,12 +109,12 @@ function lisaa() {
     <table id="myTable">
         <tr>
             <td>Day</td>
-            <td>Event begin</td>
+            <td>Event begins</td>
             <td>Event ends</td>
             <td>Event</td>
         </tr>
     </table>
-    <input type="button" value="Clear the list" onclick="poista()">
+    <input type="button" value="Clear the list" onclick="huomio()">
 
 
  
