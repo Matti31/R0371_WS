@@ -17,35 +17,7 @@
         }
         </style>
     <script>
-      function validateForm() {
-    var x = document.forms.tyhja.paiva.value;
-    var p = document.getElementById('paiva');
-    var a = document.getElementById('alku');
-    var l = document.getElementById('loppu');
-    var t = document.getElementById('tapahtuma');
-    if (p == null) {
-        alert("You must select date");
-        p.style.borderColor = "red"; 
-        document.getElementById('pai').innerHTML=”<b>*Please select day </b>"
-        return false;
-    }
-    if (a == null) {
-        alert("You must select time");
-        a.style.borderColor = "red"; 
-        document.getElementById('pai').innerHTML=”<b>*Please select time </b>"
-        return false;
-    }
-    if (l == null) {
-        alert("You must select time");
-        return false;
-    }
-    if (t == null || x== "") {
-        alert("You must select event!");
-        return false;
-    }
-
-}
-function lisaa() {
+        function lisaa() {
         var event = document.forms.tyhja.paiva.value;
         var table = document.getElementById("myTable");
         var paiva = document.getElementById('paiva').value;
@@ -64,6 +36,7 @@ function lisaa() {
       document.getElementsByTagName('h2')[0].innerHTML = "It Seems that you have something to do after all";
       document.getElementsByTagName('p')[0].innerHTML = "Add another event!";
     }
+
     function huomio() {
      var p = confirm("Are you sure you want to clear your list?");
       if (p == true) {
@@ -80,6 +53,29 @@ function lisaa() {
 }
 
 }
+
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("myTable");
+  switching = true;
+  while (switching) {
+    switching = false;
+    rows = table.rows;
+    for (i = 1; i < (rows.length - 1); i++) {
+      shouldSwitch = false;
+      x = rows[i].getElementsByTagName("TD")[0];
+      y = rows[i + 1].getElementsByTagName("TD")[0];
+      if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
     
     </script>
     
@@ -92,20 +88,17 @@ function lisaa() {
              <span id="pai"></span></br>
             Even begins:
             <input type="time" name="alku" id="alku">
-            <span id="tim"></span></br>
         </br>
             Event ends:
             <input type="time" name="loppu" id="loppu">
-            <span id="tim1"></span></br>
     </br>
             Event:
             <input type="text" name="tapahtuma" id="tapahtuma">
-            <span id="tap"></span></br>
 </br>
             <input type="submit" value="Add event" onclick="lisaa()"> 
             </p>
     </form>
-
+    <p><button onclick="sortTable()">Sort by day</button></p>
     <table id="myTable">
         <tr>
             <td>Day</td>
@@ -115,7 +108,7 @@ function lisaa() {
         </tr>
     </table>
     <input type="button" value="Clear the list" onclick="huomio()">
-
+    
 
  
     </html>
