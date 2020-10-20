@@ -79,8 +79,13 @@
         form { 
           text-align: center;
           margin: auto;
-          width: 50%;
-          
+          width: 50%; 
+        }
+        td:last-child {
+          background-color: red;
+          color: white;
+          text-decoration: underline;
+          cursor: pointer;
         }
         
         </style>
@@ -92,18 +97,26 @@
         var alku = document.getElementById('alku').value;
         var loppu = document.getElementById('loppu').value;
         var tapah = document.getElementById('tapahtuma').value;
+        var d = '<input onclick="PoistaR()" type="submit" value="Delete event">';
   var row = table.insertRow(-1);
   var cell1 = row.insertCell(0);
   var cell2 = row.insertCell(1);
   var cell3 = row.insertCell(2);
   var cell4 = row.insertCell(3);
+  var cell5 = row.insertCell(4);
      cell1.innerHTML = paiva;
       cell2.innerHTML = alku;
       cell3.innerHTML = loppu;
       cell4.innerHTML = tapah;
+      cell5.innerHTML = d;
       document.getElementsByTagName('h2')[0].innerHTML = "It Seems that you have something to do after all!";
       document.getElementsByTagName('p')[0].innerHTML = "Add another event!";
     }
+
+ function PoistaR() {
+   var table  = document.getElementById("myTable");
+    
+ }
 
     function huomio() {
      var p = confirm("Are you sure you want to clear your list?");
@@ -150,16 +163,36 @@ function validoi() {
     var a = document.forms.tyhja.alku.value;
     var l = document.forms.tyhja.loppu.value;
     var t = document.forms.tyhja.tapahtuma.value;
-    if (p == null || p == "" || a == null || a == "" || l == null || l == "" || t == null || t == "") {
-        alert("Please fill all the fields!");
+    if (p == null || p == "") {
+        alert("Please fill the day field!");
+     
         return false;
+    }
+    else if (a== null || a =="") {
+      alert("Please fill the event begins field!");
+     
+     return false;
+    }
+    else if (l== null || l =="") {
+      alert("Please fill the event ends field!");
+     
+     return false;
+    }
+    else if (t== null || t =="") {
+      alert("Please fill the eventfield!");
+     
+     return false;
     }
     else { 
       lisaa();
 
     }
 }
-    </script>
+
+
+
+    
+   </script>
     
     <header>Todo-list</header>
     <form name="tyhja" action="#" onsubmit="return false" method="POST">
@@ -187,6 +220,7 @@ function validoi() {
             <td>Event begins</td>
             <td>Event ends</td>
             <td>Event</td>
+            <td>Delete event</td>
         </tr>
     </table>
     <input type="button" class="button2" value="Clear the list" onclick="huomio()">
