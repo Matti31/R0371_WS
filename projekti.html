@@ -3,6 +3,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>   
     <style>
+   /*Tyylit sivustolle*/
         body {
           background-color: #BDFFFD;
           box-sizing: border-box;
@@ -82,14 +83,48 @@
           width: 50%; 
         }
         td:last-child {
-          background-color: red;
-          color: white;
           text-decoration: underline;
           cursor: pointer;
         }
         
         </style>
     <script>
+      // funktio validoi tarkastaa käyttäjän syötteet ja ilmoittaa jos niissä on puutteita
+function validoi() {
+    var p = document.forms.tyhja.paiva.value;
+    var a = document.forms.tyhja.alku.value;
+    var l = document.forms.tyhja.loppu.value;
+    var t = document.forms.tyhja.tapahtuma.value;
+    if (p == null || p == "") {
+        alert("Please fill the day field!");
+        var x = document.forms.tyhja.paiva;
+        x.style.borderColor  = "red";
+        return false;
+    }
+    else if (a== null || a =="") {
+      alert("Please fill the event begins field!");
+      var b = document.forms.tyhja.alku;
+        b.style.borderColor  = "red";
+     return false;
+    }
+    else if (l== null || l =="") {
+      alert("Please fill the event ends field!");
+      var e = document.forms.tyhja.loppu;
+        e.style.borderColor  = "red";
+     return false;
+    }
+    else if (t== null || t =="") {
+      alert("Please fill the event field!");
+      var t = document.forms.tyhja.tapahtuma;
+        t.style.borderColor  = "red";
+     return false;
+    }
+    else { 
+      lisaa();
+
+    }
+}
+      //Funktio lisaa lukee käyttäjän syötteet ja lisää taulukkoon uuden rivin niiden pohjalta
         function lisaa() {
         var event = document.forms.tyhja.paiva.value;
         var table = document.getElementById("myTable");
@@ -97,7 +132,7 @@
         var alku = document.getElementById('alku').value;
         var loppu = document.getElementById('loppu').value;
         var tapah = document.getElementById('tapahtuma').value;
-        var d = '<input onclick="PoistaR()" type="submit" value="Delete event">';
+        var d = '<input onclick="poistaR(this);" type="submit" value="Delete event">';
   var row = table.insertRow(-1);
   var cell1 = row.insertCell(0);
   var cell2 = row.insertCell(1);
@@ -113,11 +148,17 @@
       document.getElementsByTagName('p')[0].innerHTML = "Add another event!";
     }
 
- function PoistaR() {
-   var table  = document.getElementById("myTable");
+//funktio poistaR poistaa valitun rivin (eli sen missä poista nappula sijaitsee)
+ function poistaR(r) {
+var i = r.parentNode.parentNode.rowIndex;
+var d = confirm("Are you sure that you want to delete this event from your list?");
+if (d == true) {
+document.getElementById("myTable").deleteRow(i);
+}
+}
     
- }
-
+ 
+//funktio huomio, laukaisee funktion poista, joka tyhjentää listalta kaikki tapahtumat, mikäli käyttäjä painaa ok
     function huomio() {
      var p = confirm("Are you sure you want to clear your list?");
       if (p == true) {
@@ -134,7 +175,7 @@
 }
 
 }
-
+// funktio sortTable lajittelee listan tapahtumat päivä järjestykseen mikäli käyttäjä klikkaa Sort by day nappulaa 
 function sortTable() {
   var table, rows, switching, i, x, y, shouldSwitch;
   table = document.getElementById("myTable");
@@ -158,49 +199,17 @@ function sortTable() {
   }
 }
 
-function validoi() {
-    var p = document.forms.tyhja.paiva.value;
-    var a = document.forms.tyhja.alku.value;
-    var l = document.forms.tyhja.loppu.value;
-    var t = document.forms.tyhja.tapahtuma.value;
-    if (p == null || p == "") {
-        alert("Please fill the day field!");
-     
-        return false;
-    }
-    else if (a== null || a =="") {
-      alert("Please fill the event begins field!");
-     
-     return false;
-    }
-    else if (l== null || l =="") {
-      alert("Please fill the event ends field!");
-     
-     return false;
-    }
-    else if (t== null || t =="") {
-      alert("Please fill the eventfield!");
-     
-     return false;
-    }
-    else { 
-      lisaa();
-
-    }
-}
-
-
-
-    
    </script>
     
     <header>Todo-list</header>
+    <!-- Alla olevaan lomakkeeseen käyttäjä voi syöttää haluamansa päivän, alku ja loppumisajankohdat sekä tapahtuman nimen,
+    klikkaamalla add event painiketta validoi funktio käynnistyy, joka tarkastaa syötteet ennen kuin siirtää ne taulukkoon  -->
     <form name="tyhja" action="#" onsubmit="return false" method="POST">
         <h2>Oh dear, it seems that you have nothing to do!</h2>
         <p>If you feel like you should have something important to remember, schedule it below</p>
         <p>Day:
             <input type="date" name="paiva" id="paiva">
-             <span id="pai"></span></br>
+            </br>
             Even begins:
             <input type="time" name="alku" id="alku">
         </br>
@@ -210,10 +219,12 @@ function validoi() {
             Event:
             <input type="text" name="tapahtuma" id="tapahtuma">
 </br>
-            <input type="submit" value="Add event" onclick="validoi()"> 
+            <input type="submit" value="Add event" onclick="validoi();"> 
             </p>
     </form>
+    <!-- Tämä painike järjestää taulukon sisällön päivän mukaan, koodi on suoraan W3Schoolista -->
     <p><button class="button button1" onclick="sortTable()">Sort by day</button></p>
+    <!--taulukko jojon syötetyt tapahtumat tulevat-->
     <table id="myTable">
         <tr>
             <td>Day</td>
@@ -223,8 +234,7 @@ function validoi() {
             <td>Delete event</td>
         </tr>
     </table>
+  <!-- klikkaamalla tästä painikkeesta käynnistyy huomio funktio, jonka avulla taulukon voi tyhjentää.-->
     <input type="button" class="button2" value="Clear the list" onclick="huomio()">
-    
-
- 
+  
     </html>
